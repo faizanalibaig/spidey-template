@@ -1,0 +1,32 @@
+services:
+  silibe:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: silici
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./.env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: portal
+      MONGO_INITDB_ROOT_PASSWORD: 789123
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - '8081:8081'
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://portal:789123@mongo:27017/
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: serviceportal
+      ME_CONFIG_BASICAUTH_PASSWORD: 123456
