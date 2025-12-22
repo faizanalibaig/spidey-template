@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 
+import { config, logger } from '.';
+
 class DatabaseConfig {
   public async connect() {
     try {
-      await mongoose.connect('mongodb://localhost:27017');
+      await mongoose.connect(config.database.uri);
     } catch (error) {
-      console.error('Error connecting to MongoDB:', error);
+      logger.error(`Error connecting to MongoDB: ${error}`);
     }
   }
 
@@ -13,7 +15,7 @@ class DatabaseConfig {
     try {
       await mongoose.disconnect();
     } catch (error) {
-      console.error('Error disconnecting from MongoDB:', error);
+      logger.error(`Error disconnecting from MongoDB: ${error}`);
     }
   }
 }

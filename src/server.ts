@@ -1,14 +1,11 @@
-import pino from 'pino';
-
 import { App } from './app';
-import { DatabaseConfig } from './config';
+import { config, DatabaseConfig, logger } from './config';
 
 const database = new DatabaseConfig();
 
 async function bootstrap() {
   const app = new App();
-  const port = Number(process.env.PORT) || 3000;
-  const logger = pino();
+  const port = config.app.port;
 
   await database.connect();
   logger.info('Database connected');

@@ -1,3 +1,5 @@
-import { DatabaseConfig } from './database.config';
+import { config } from './config';
+import { DatabaseConfig } from './database';
+import { logger } from './pino';
 
-export { DatabaseConfig };
+export { config, DatabaseConfig, logger };
