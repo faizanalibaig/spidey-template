@@ -1,11 +1,21 @@
-import express from 'express';
-const app = express();
-const port = 3000;
+import pino from 'pino';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+import { App } from './app';
+import { DatabaseConfig } from './config';
 
-app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
-});
+const database = new DatabaseConfig();
+
+async function bootstrap() {
+  const app = new App();
+  const port = Number(process.env.PORT) || 3000;
+  const logger = pino();
+
+  await database.connect();
+  logger.info('Database connected');
+
+  app.listen(port, () => {
+    return console.log(`Express is listening at http://localhost:${port}`);
+  });
+}
+
+bootstrap();
