@@ -5,6 +5,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   token: string;
+  ComparePassword(password: string): Promise<boolean>;
 }
 
 const UserSchema: Schema<IUser> = new Schema<IUser>(
@@ -32,6 +33,12 @@ UserSchema.post('save', async function (doc: IUser) {
 
   await doc.save();
 });
+
+UserSchema.methods.ComparePassword = async function (
+  password: string,
+): Promise<boolean> {
+  return this.password === password;
+};
 
 const UserModel = mongoose.model<IUser>('User', UserSchema);
 
