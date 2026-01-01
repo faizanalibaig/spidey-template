@@ -12,6 +12,9 @@
     "lint": "eslint .",
     "prepare": "husky"
   },
+  "_moduleAliases": {
+    "@root": "src"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -30,6 +33,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^8.1.0",
+    "module-alias": "^2.2.3",
     "mongoose": "^9.0.2",
     "pino": "^10.1.0",
     "zod": "^4.2.1"

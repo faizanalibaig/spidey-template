@@ -1,5 +1,7 @@
-import { App } from './app';
-import { config, DatabaseConfig, logger } from './config';
+import 'module-alias/register';
+
+import { App } from '@root/app';
+import { config, DatabaseConfig, logger } from '@root/config';
 
 const database = new DatabaseConfig();
 

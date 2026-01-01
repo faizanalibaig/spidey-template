@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 
+import AppRoutes from '@root/routes/app.route';
+
 class App {
   private app: Application;
 
@@ -26,6 +28,8 @@ class App {
         allowedHeaders: ['Content-Type', 'Authorization'],
       }),
     );
+
+    this.app.use(AppRoutes);
 
     this.app.get('/', (req, res) => {
       res.send('Hello World!');

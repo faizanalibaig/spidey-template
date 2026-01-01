@@ -6,6 +6,16 @@
     "esModuleInterop": true,
     "strict": true,
     "moduleResolution": "node",
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["src/*"],
+      "@deep": ["src/some/deep/directory/or/file"],
+      "@my_module": ["lib/some-file.js"],
+      "config": ["src/config/index"],
+      "app": ["app"],
+      "auth": ["src/internals/auth"],
+      "auth/*": ["src/internals/auth/*"],
+    },
+  },
 }
