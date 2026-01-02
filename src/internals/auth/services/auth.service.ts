@@ -3,6 +3,8 @@ import { AppError } from '@root/core/utils/index';
 
 const signup = async (username: string, email: string, password: string) => {
   const user = new UserModel({ username, email, password });
+  user.password = await user.HashPassword(password);
+
   await user.save();
 
   if (!user) {
@@ -21,6 +23,8 @@ const login = async (email: string, password: string) => {
   if (!user || !(await user.ComparePassword(password))) {
     throw new AppError('Invalid email or password', 401);
   }
+
+  const token = await user.GenerateToken();
 
   return {
     id: user._id,
