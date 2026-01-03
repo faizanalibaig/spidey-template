@@ -1,4 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 export interface IUser extends Document {
   username: string;
@@ -60,8 +62,8 @@ UserSchema.methods.GenerateToken = async function (): Promise<string> {
     },
     process.env.JWT_SECRET!,
     {
-      expiresIn: process.env.JWT_EXPIRES_IN!,
-      algorithm: 'HS512',
+      expiresIn: '1d',
+      algorithm: 'ES512',
     },
   );
 
