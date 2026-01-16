@@ -32,12 +32,6 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
   },
 );
 
-UserSchema.post('save', async function (doc: IUser) {
-  doc.username = doc.username.toLowerCase().trim();
-
-  await doc.save();
-});
-
 UserSchema.methods.HashPassword = async function (
   password: string,
 ): Promise<string> {
